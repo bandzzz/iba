@@ -21,6 +21,9 @@ jobs:
 
       - name: Check Terraform Version
         run: terraform --version
+           
+      - name: Terraform Init
+        run: terraform init
              
       - name: Set AWS credentials
         run: |
