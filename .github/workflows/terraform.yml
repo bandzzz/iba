@@ -5,7 +5,7 @@ on:
     branches:
       - main
 
-jobs:  terraform-version:
+jobs: terraform-version
     runs-on: ubuntu-latest
 
     steps:
