@@ -3,10 +3,10 @@ name: Terraform
 on:
   push:
     branches:
-      - main  # или ваш основной бранч
+      - main 
   pull_request:
     branches:
-      - main  # или ваш основной бранч
+      - main 
 
 jobs:
   terraform:
@@ -29,4 +29,4 @@ jobs:
 
       - name: Terraform Apply
         run: terraform apply -auto-approve
-        if: github.ref == 'refs/heads/main'  # Убедитесь, что apply происходит только для main бранча
+        if: github.ref == 'refs/heads/main' 
