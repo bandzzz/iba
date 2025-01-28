@@ -1,9 +1,11 @@
-name: Terraform Version Check
+name: TF
 
 on:
   push:
     branches:
       - main
+    paths:
+      - "./*.tf"
 
 jobs:
   terraform-version:
