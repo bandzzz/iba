@@ -1,11 +1,12 @@
-name: Terraform
+name: Terraform Version Check
 
 on:
   push:
     branches:
       - main
 
-jobs: terraform-version
+jobs:
+  terraform-version:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,5 +19,3 @@ jobs: terraform-version
           terraform_version: 1.4.6  # Замените на нужную версию Terraform
 
       - name: Check Terraform Version
-        run: terraform --version
-          
