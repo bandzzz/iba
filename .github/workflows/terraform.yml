@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
   terraform:
@@ -15,11 +12,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
+        
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v1
         with:
-          terraform_version: 1.5.0
+          terraform_version: 1.0.0
 
       - name: Terraform Init
         run: terraform init
@@ -29,4 +26,5 @@ jobs:
 
       - name: Terraform Apply
         run: terraform apply -auto-approve
-        if: github.ref == 'refs/heads/main'
+        env:
+          TF_VAR_your_variable: ${{ secrets.YOUR_SECRET }}  # Укажите переменные окружения и секреты, если нужно
