@@ -16,7 +16,7 @@ jobs:
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2
         with:
-          terraform_version: 1.4.6  # Замените на нужную версию Terraform
+          terraform_version: 1.10.2
 
       - name: Check Terraform Version
         run: terraform --version
