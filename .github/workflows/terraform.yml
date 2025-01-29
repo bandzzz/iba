@@ -1,40 +1,36 @@
-name: TF
+name: Setup AWS Resources for Terraform
 
 on:
   push:
     branches:
       - main
-    
 
 jobs:
-  terraform-version:
+  setup-aws-resources:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: Set up AWS CLI
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-            AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-            AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-            AWS_DEFAULT_REGION: us-east-1
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Create S3 bucket for Terraform state
-        run: |
-          aws s3api create-bucket --bucket your-terraform-state-bucket --region us-east-1
+    - name: Set up AWS CLI
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: us-east-1
 
-      - name: Create DynamoDB table for Terraform locking
-        run: |
-          aws dynamodb create-table \
-          --table-name terraform-lock-table \
+    - name: Create S3 bucket for Terraform state
+      run: |
+        aws s3api create-bucket --bucket bandzzz_terraform_state_202501 --region us-east-1
+
+    - name: Create DynamoDB table for Terraform locking
+      run: |
+        aws dynamodb create-table \
+          --table-name bandzzz_terraform_lock_202501 \
           --attribute-definitions AttributeName=LockID,AttributeType=S \
           --key-schema AttributeName=LockID,KeyType=HASH \
           --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1 \
           --region us-east-1
-
-
-
-
 
     
