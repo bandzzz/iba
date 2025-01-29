@@ -14,11 +14,12 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Set up AWS CLI
-      env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: us-east-1
-
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+           AWS_DEFAULT_REGION: us-east-1
+        
     - name: Create S3 bucket for Terraform state
       run: |
         aws s3api create-bucket --bucket bandzzz_terraform_state_202501 --region us-east-1
