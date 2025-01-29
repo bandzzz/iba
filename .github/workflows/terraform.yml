@@ -30,5 +30,8 @@ jobs:
           --key-schema AttributeName=LockID,KeyType=HASH \
           --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1 \
           --region us-east-1
-
+          
+          -var "aws_access_key=${{ secrets.AWS_ACCESS_KEY_ID }}" \
+          -var "aws_secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" \
+          -var "aws_region=us-east-1"
     
