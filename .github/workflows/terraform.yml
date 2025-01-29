@@ -21,31 +21,27 @@ jobs:
 
       - name: Check Terraform Version
         run: terraform --version
+
         
-     
       - name: Terraform Init & Apply
 
         env:
-
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-  
           AWS_DEFAULT_REGION: us-east-1
           
-      - name: Run AWS CLI Command
-        run: | 
-            aws s3 ls
-            aws s3api create-bucket --bucket bandzzz_terraform_state_202501 --region us-east-1
-            aws dynamodb create-table \
-            --table-name bandzzz_terraform_lock_202501 \
-            --attribute-definitions AttributeName=LockID,AttributeType=S \
-            --key-schema AttributeName=LockID,KeyType=HASH \
-            --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1 \
-            --region us-east-1
-            run: |
-            -var "aws_access_key=${{ secrets.AWS_ACCESS_KEY_ID }}" \
+      - name: Create S3 bucket for Terraform state
+        run: |
+          aws s3api create-bucket --bucket bandzzz_terraform_state_202501 --region us-east-1
 
-            -var "aws_secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" \
-
-            -var "aws_region=us-east-1"
+      - name: Create DynamoDB table for Terraform locking
+        run: |
+          aws dynamodb create-table \
+          --table-name bandzzz_terraform_lock_202501 \
+          --attribute-definitions AttributeName=LockID,AttributeType=S \
+          --key-schema AttributeName=LockID,KeyType=HASH \
+          --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1 \
+          --region us-east-1    
+          -var "aws_access_key=${{ secrets.AWS_ACCESS_KEY_ID }}" \
+          -var "aws_secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" \
+          -var "aws_region=us-east-1"
