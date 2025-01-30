@@ -3,7 +3,7 @@ resource "aws_eks_cluster" "bandzzz_eks_cluster_202501" {
   role_arn = aws_iam_role.bandzzz_eks_cluster_role_202501.arn
 
   vpc_config {
-    subnet_ids = aws_subnet.bandzzz_subnet_202501[*].id
+    subnet_ids = [aws_subnet.subnet_a.id, aws_subnet.subnet_b.id]
   }
 
   depends_on = [
@@ -15,7 +15,7 @@ resource "aws_eks_node_group" "bandzzz_eks_node_group_202501" {
   cluster_name    = aws_eks_cluster.bandzzz_eks_cluster_202501.name
   node_group_name = "bandzzz_eks_node_group_202501"
   node_role_arn   = aws_iam_role.bandzzz_eks_node_role_202501.arn
-  subnet_ids      = aws_subnet.bandzzz_subnet_202501[*].id
+  subnet_ids      = [aws_subnet.subnet_a.id, aws_subnet.subnet_b.id]
 
   scaling_config {
     desired_size = 2
