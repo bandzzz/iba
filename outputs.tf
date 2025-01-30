@@ -1,5 +1,5 @@
 output "vpc_id" {
-  value = aws_vpc.bandzzz_vpc_202501.id
+  value = aws_vpc.bandzzz_vpc.id
 }
 
 output "eks_cluster_name" {
