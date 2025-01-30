@@ -20,11 +20,6 @@ resource "aws_iam_role_policy_attachment" "bandzzz_eks_cluster_policy_202501" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
 }
 
-resource "aws_iam_role_policy_attachment" "bandzzz_eks_service_policy_202501" {
-  role       = aws_iam_role.bandzzz_eks_cluster_role_202501.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSServicePolicy"
-}
-
 resource "aws_iam_role" "bandzzz_eks_node_role_202501" {
   name = "bandzzz_eks_node_role_202501"
 
