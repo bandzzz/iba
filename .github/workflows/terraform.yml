@@ -1,9 +1,5 @@
 name: Setup AWS Resources for Terraform
 
-on:
-  push:
-    branches:
-      - main
 
 jobs:
   setup-aws-resources:
