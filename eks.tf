@@ -25,6 +25,10 @@ resource "aws_eks_node_group" "bandzzz_eks_node_group_202501" {
 
   instance_types = [var.node_instance_type]
 
+tags = {
+  "Name" = "bandzzz-eks-node-${count.index}"
+}
+
   depends_on = [
     aws_iam_role_policy_attachment.bandzzz_eks_worker_node_policy_202501,
     aws_iam_role_policy_attachment.bandzzz_eks_cni_policy_202501,
