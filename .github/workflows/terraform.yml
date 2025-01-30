@@ -22,4 +22,4 @@ jobs:
 
     - name: Create S3 bucket for Terraform state
       run: |
-        aws s3api create-bucket --bucket bandzzz_terraform_state_202501 --region us-east-1
+        aws s3api create-bucket --bucket bandzzz_terraform_state_bucket --region us-east-1
