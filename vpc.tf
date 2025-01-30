@@ -9,13 +9,12 @@ resource "aws_vpc" "bandzzz_vpc_202501" {
 }
 
 resource "aws_subnet" "bandzzz_subnet_202501" {
-  count             = 2
-  vpc_id            = aws_vpc.bandzzz_vpc_202501.id
-  cidr_block        = cidrsubnet(aws_vpc.bandzzz_vpc_202501.cidr_block, 8, count.index)
-  availability_zone = element(data.aws_availability_zones.available.names, count.index)
+  count      = 2
+  vpc_id     = aws_vpc.bandzzz_vpc_202501.id
+  cidr_block = cidrsubnet(aws_vpc.bandzzz_vpc_202501.cidr_block, 4, count.index)
 
   tags = {
-    Name = "bandzzz_subnet_${count.index}_202501"
+    Name = "bandzzz-subnet-${count.index + 1}"
   }
 }
 
