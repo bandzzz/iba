@@ -33,12 +33,8 @@ jobs:
 
         run: |
   
-          terraform init
-
-          terraform apply -auto-approve \
-
-          -var "aws_access_key=${{ secrets.AWS_ACCESS_KEY_ID }}" \
-
-          -var "aws_secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" \
-
-          -var "aws_region=us-east-1"
+      - name: Terraform Init
+        run: terraform init
+             
+      - name: Terraform Destroy
+        run: terraform destroy
