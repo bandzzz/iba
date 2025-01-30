@@ -1,3 +1,4 @@
+# Настройка блокировки состояния в бакете S3
 terraform {
   backend "s3" {
     bucket         = "bandzzz-terraform-state-bucket-202501"
